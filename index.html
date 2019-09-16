@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Metamorphic tests
+
+---
+
+## Oracle Tests
+
+```js
+expect(add(1, 1)).toEqual(2)
+
+```
+
+--
+
+## Generative Tests (aka Property based test)
+
+```js
+forAll(a => {
+  expect(add(a, 1)).toBeGreaterThan(a)
+})
+```
+
+---
+
+
+## Metamorphic Tests
+
+Given:
+  - `f` the function under test,
+  - `x` and `x2` some inputs of `f`
+  - `R` a relation beween `x` and `x2`
+
+Then there is a relation between `f(x)` and `f(x2)`  
+
+
+--
+
+Example 
+
+```js
+forAll( (a, b) => {
+  expect(add(a, b)).toBeEqual(add(b, a))
+})
+```
+
+
+---
+
+## Some real use cases
+
+* Mathematical properties:
+  - reflexivity: `f(a, b) === f(b , a)`
+  - idempotence: `f(f(a)) === f(a)`
+  - associativity: `f(f(a, b), c) === f(a, f(b, c))`
+
+--
+
+* Image recognition:
+  - the bounding box stays the same even with a change in the image color
+  - the bounding box is rotated if the image is rotated
+
+--
+
+* Querying (e.g. API):
+  - result of filtered query is a subset of the result of a query without filter
+  - equivalence: sorting the results should not change the elements returned
+  
+
+---
+
+## Conclusion
+
+Calling multiple time the system under test maybe sometimes be useful!
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
