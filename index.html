@@ -65,34 +65,43 @@ forAll( (a, b) => {
 })
 ```
 
+---
+
+## Some real use cases - Image recognition
+
+<img src="./moloch_bounded.jpg" alt="moloch horridus" style="height:100px" />
+
+- the bounding box stays the same if the colors changes
+<br />
+<img src="./moloch_bounded_color.jpg" alt="moloch horridus" style="height:100px" />
+
+- the bounding box is mirrored if the image is mirrored
+<br />
+<img src="./moloch_bounded_mirror.jpg" alt="moloch horridus" style="height:100px" />
+
 
 ---
 
-## Some real use cases
+## Some real use cases - Querying (e.g. API)
 
-* Mathematical properties:
-  - reflexivity: `f(a, b) === f(b , a)`
+- result of filtered query is a subset of the result of a query without filter
+- sorting the results should not change the elements returned
+
+
+---
+
+## Some real use cases - Mathematical properties
+
+  - reflexivity: `f(a, b) === f(b, a)`
   - idempotence: `f(f(a)) === f(a)`
   - associativity: `f(f(a, b), c) === f(a, f(b, c))`
 
---
-
-* Image recognition:
-  - the bounding box stays the same even with a change in the image color
-  - the bounding box is rotated if the image is rotated
-
---
-
-* Querying (e.g. API):
-  - result of filtered query is a subset of the result of a query without filter
-  - equivalence: sorting the results should not change the elements returned
-  
 
 ---
 
-## Conclusion
+## Conclusion - Metamorphic Tests
 
-Calling multiple time the system under test maybe sometimes be useful!
+Calling multiple time the system under test to compare the results may sometimes gives useful insights!
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
